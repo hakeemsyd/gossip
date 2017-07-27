@@ -14,9 +14,9 @@
     "typescript": "^2.4.2"
   },
   "scripts": {
-    "start": "react-native start",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "watch": "npm run build -- -w",
+    "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator'",
+    "start:android": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "tsc": "tsc",
     "clean": "rimraf artifacts",

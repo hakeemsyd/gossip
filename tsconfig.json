@@ -18,7 +18,8 @@
     "filesGlob": [
         "typings/index.d.ts",
         "./**/*.ts",
-        "./**/*.tsx"
+        "./**/*.tsx",
+        "app/images/1.jpg"
     ],
     "types": [
         "react",
