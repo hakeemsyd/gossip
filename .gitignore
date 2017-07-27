@@ -43,3 +43,6 @@ Pods
 haste-map-react-native-packager*
 adb*
 react-native-packager-cache-b61aad938f48f61de95a066b83e8938f59e5ad00/
+
+# artifacts
+artifacts/*
