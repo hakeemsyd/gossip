@@ -3,7 +3,14 @@ import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { onSignIn } from '../auth';
 
-export class SignUp extends React.Component {
+interface Props {
+	navigation: any;
+}
+
+interface State {
+
+}
+export class SignUp extends React.Component<Props, State> {
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
