@@ -7,6 +7,7 @@
     "@types/react": "^15.0.39",
     "@types/react-native": "^0.46.7",
     "concurrently": "^3.5.0",
+    "gulp": "^3.9.1",
     "jest-expo": "~18.0.0",
     "react-test-renderer": "16.0.0-alpha.12",
     "rimraf": "^2.6.1",
@@ -14,20 +15,20 @@
     "typescript": "^2.4.2"
   },
   "scripts": {
-    "watch": "npm run build -- -w",
-    "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator'",
-    "start:android": "npm run build && concurrently -r 'npm run watch' 'react-native run-android'",
-    "test": "node node_modules/jest/bin/jest.js --watch",
-    "tsc": "tsc",
-    "clean": "rimraf artifacts",
-    "build": "npm run clean && npm run tsc --",
-    "lint": "tslint app/**/*.{ts,tsx}"
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "start": "concurrent \"npm run watch\" \"node node_modules/react-native/local-cli/cli.js start\" ",
+    "android": "adb reverse tcp:8081 tcp:8081 && react-native run-android"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@types/react-native": "^0.46.9",
     "firebase": "^4.1.5",
+    "gulp": "^3.9.1",
+    "gulp-tslint": "^8.1.1",
+    "gulp-typescript": "^3.2.1",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.45.1",
     "react-native-elements": "^0.14.0",
