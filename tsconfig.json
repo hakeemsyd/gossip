@@ -19,7 +19,7 @@
         "typings/index.d.ts",
         "./**/*.ts",
         "./**/*.tsx",
-        "app/images/1.jpg"
+        "app/images"
     ],
     "types": [
         "react",
@@ -29,7 +29,7 @@
     "exclude": [
         "android",
         "ios",
-        "build",
+        "bin",
         "node_modules"
     ],
     "compileOnSave": false

@@ -44,6 +44,6 @@ haste-map-react-native-packager*
 adb*
 react-native-packager-cache-*
 
-# artifacts
-artifacts/*
+# bin
+bin/*
 typings
