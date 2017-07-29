@@ -3,11 +3,7 @@ import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { onSignIn } from '../auth';
 
-interface SignUpProps {
-	navigation?: any; // Question mark indicates prop is optional
-}
-
-export class SignUp extends React.Component<SignUpProps, null> {
+export class SignUp extends React.Component {
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
@@ -32,7 +28,7 @@ export class SignUp extends React.Component<SignUpProps, null> {
 						backgroundColor='transparent'
 						textStyle={{ color: '#bcbec1' }}
 						title='Sign In'
-						onPress={() => navigate('SignIn')}
+						onPress={() => navigate('SignIn', { name: 'SignIn' })}
 					/>
 				</Card>
 			</View>

@@ -1,14 +1,15 @@
+'using strict'
 // import React from 'react';
 // import { Platform, StatusBar } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 // import { FontAwesome } from 'react-native-vector-icons';
 
-import SignUp from './layout/SignUp';
-import SignIn from './layout/SignIn';
-import Home from './layout/Home';
-import Profile from './layout/Profile';
+import { SignUp } from './layout/SignUp';
+import { SignIn } from './layout/SignIn';
+import { Home } from './layout/Home';
+import { Profile } from './layout/Profile';
 
-export const signedOut = StackNavigator({
+export const SignedOut = StackNavigator({
 	SignUp: {
 		screen: SignUp,
 		navigationOptions: {
@@ -23,7 +24,7 @@ export const signedOut = StackNavigator({
 	}
 });
 
-export const signedIn = TabNavigator({
+export const SignedIn = TabNavigator({
 	Home: {
 		screen: Home,
 		navigationOptions: {
