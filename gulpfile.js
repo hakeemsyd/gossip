@@ -21,8 +21,8 @@ gulp.task('assets', function () {
 });
 
 gulp.task('watch', ['build'], function () {
-    gulp.watch('./**/*.ts', ['build']);
-    gulp.watch('./**/*.tsx', ['build']);
+    gulp.watch('./**/*.ts', ['compile']);
+    gulp.watch('./**/*.tsx', ['compile']);
 });
 
 gulp.task('build', ['clean', 'compile', 'assets'])
