@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
-import { onSignIn, onSignUp } from '../auth';
+import { SignUpStore } from '../stores/SignUpStore';
+import { observer } from 'mobx-react';
 
 interface Props {
 	navigation: any;
@@ -12,14 +13,14 @@ interface State {
 	password: string;
 	repassword: string;
 }
+
+@observer
 export class SignUp extends React.Component<Props, State> {
+	private store: SignUpStore;
+
 	constructor(props) {
 		super(props);
-		this.state = {
-			username: "hakeemsyd@gmai.com",
-			password: "",
-			repassword: ""
-		};
+		this.store = new SignUpStore();
 	}
 
 	render() {
@@ -29,29 +30,33 @@ export class SignUp extends React.Component<Props, State> {
 				<Card>
 					<FormLabel>Email</FormLabel>
 					<FormInput placeholder='Email address...'
-						onChangeText={(text) => this.setState({ username: text })}>
+						value={this.store.username}
+						onChangeText={(text) => this.store.setUsername(text)}>
 					</FormInput>
 					<FormLabel>Password</FormLabel>
 					<FormInput secureTextEntry placeholder='Password...'
-						onChangeText={(text) => this.setState({ password: text })}>
+						value={this.store.password}
+						onChangeText={(text) => this.store.setPassword(text)}>
 					</FormInput>
 					<FormLabel>Confirm Password</FormLabel>
 					<FormInput secureTextEntry placeholder='Confirm Password...'
-						onChangeText={(text) => this.setState({ repassword: text })}>
+						value={this.store.repassword}
+						onChangeText={(text) => this.store.setRePassword(text)}>
 					</FormInput>
 
 					<Button
 						buttonStyle={{ marginTop: 20 }}
 						backgroundColor='#03A9F4'
 						title='SIGN UP'
-						onPress={() => onSignUp(this.state.username, this.state.password,
-							this.state.repassword)}
+						disabled={this.store.isBusy}
+						onPress={() => this.store.signUp()}
 					/>
 					<Button
 						buttonStyle={{ marginTop: 20 }}
 						backgroundColor='transparent'
 						textStyle={{ color: '#bcbec1' }}
 						title='Sign In'
+						disabled={this.store.isBusy}
 						onPress={() => navigate('SignIn', { name: 'SignIn' })}
 					/>
 				</Card>

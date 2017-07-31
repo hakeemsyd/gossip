@@ -1,7 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
-import { onSignIn } from '../auth';
+import { SignInStore } from '../stores/SignInStore';
+import { observer } from 'mobx-react';
+
 interface Props {
 	navigation?: any; // Question mark indicates prop is optional
 }
@@ -10,14 +12,14 @@ interface State {
 	username: string;
 	password: string;
 }
+
+@observer
 export class SignIn extends React.Component<Props, State> {
+	private store: SignInStore;
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			username: "",
-			password: ""
-		};
+		this.store = new SignInStore();
 	}
 
 	render() {
@@ -26,18 +28,20 @@ export class SignIn extends React.Component<Props, State> {
 				<Card title='SIGN IN'>
 					<FormLabel>Email</FormLabel>
 					<FormInput placeholder='Email address...'
-						onChangeText={(text) => this.setState({ username: text })}>
+						keyboardType='email-address'
+						onChangeText={(text) => this.store.setUsername(text)}>
 					</FormInput>
 					<FormLabel>Password</FormLabel>
 					<FormInput secureTextEntry placeholder='Password...'
-						onChangeText={(text) => this.setState({ password: text })}>
+						onChangeText={(text) => this.store.setPassword(text)}>
 					</FormInput>
 
 					<Button
 						buttonStyle={{ marginTop: 20 }}
 						backgroundColor='#03A9F4'
 						title='SIGN IN'
-						onPress={() => onSignIn(this.state.username, this.state.password)}
+						disabled={this.store.isBusy}
+						onPress={() => this.store.login()}
 					/>
 				</Card>
 			</View>
