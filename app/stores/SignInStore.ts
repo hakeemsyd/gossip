@@ -25,5 +25,13 @@ export class SignInStore {
 
         this.isBusy = true;
         //do login here
+        firebaseApp.auth().signInWithEmailAndPassword(this.username, this.password)
+            .then((a: any) => {
+                console.log(a);
+                this.isBusy = false;
+            }).catch((e: Error) => {
+                console.log(e);
+                this.isBusy = false;
+            });
     }
 }

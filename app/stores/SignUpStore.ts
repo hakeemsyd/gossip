@@ -37,12 +37,13 @@ export class SignUpStore {
 
         this.isBusy = true;
         // call service here
-        setTimeout(
-            () => {
-                console.log('SignUP Finished');
+        firebaseApp.auth().createUserWithEmailAndPassword(this.username, this.password)
+            .then((data: any) => {
                 this.isBusy = false;
-            },
-            500
-        );
+                console.log(data);
+            }).catch((a: Error) => {
+                console.log(a);
+                this.isBusy = false;
+            });
     }
 }
