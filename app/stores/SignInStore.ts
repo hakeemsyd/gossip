@@ -1,6 +1,7 @@
+'use strict';
 import { observable } from 'mobx';
 import { firebaseApp } from '../index';
-import { NavigationActions } from 'react-navigation'
+import { Router } from '../router';
 
 export class SignInStore {
     @observable
@@ -10,15 +11,15 @@ export class SignInStore {
     @observable
     isBusy: boolean;
 
-    setUsername(username: string) {
+    setUsername(username: string): void {
         this.username = username;
     }
 
-    setPassword(password: string) {
+    setPassword(password: string): void {
         this.password = password;
     }
 
-    login(dispatch) {
+    login(dispatch): void {
         if (this.isBusy) {
             return;
         }
@@ -29,17 +30,12 @@ export class SignInStore {
             .then((a: any) => {
                 console.log(a);
                 this.isBusy = false;
+                Router.navigateToHome(dispatch);
 
-                const resetAction = NavigationActions.reset({
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: 'Home' })
-                    ]
-                })
-                dispatch(resetAction);
             }).catch((e: Error) => {
                 console.log(e);
                 this.isBusy = false;
+                // show error 
             });
     }
 }

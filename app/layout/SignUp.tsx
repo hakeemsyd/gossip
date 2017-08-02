@@ -1,9 +1,10 @@
+'use strict';
 import React from 'react';
 import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { SignUpStore } from '../stores/SignUpStore';
 import { observer } from 'mobx-react';
-import { NavigationActions } from 'react-navigation'
+import { Router } from '../router';
 
 interface Props {
 	navigation: any;
@@ -22,13 +23,6 @@ export class SignUp extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.store = new SignUpStore();
-	}
-
-	goBackToSignIn(dispatch) {
-		const backAction = NavigationActions.back({
-			routeName: 'SignIn'
-		})
-		dispatch(backAction);
 	}
 
 	render() {
@@ -64,7 +58,7 @@ export class SignUp extends React.Component<Props, State> {
 						textStyle={{ color: '#bcbec1' }}
 						title='Already have an account?'
 						disabled={this.store.isBusy}
-						onPress={() => this.goBackToSignIn(this.props.navigation.dispatch)}
+						onPress={() => Router.navigateToSingIn(this.props.navigation.dispatch)}
 					/>
 				</Card>
 			</View>

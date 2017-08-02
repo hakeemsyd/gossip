@@ -1,4 +1,4 @@
-'using strict'
+'use strict'
 // import React from 'react';
 // import { Platform, StatusBar } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
@@ -8,6 +8,33 @@ import { SignUp } from './layout/SignUp';
 import { SignIn } from './layout/SignIn';
 import { Home } from './layout/Home';
 import { Profile } from './layout/Profile';
+import { NavigationActions } from 'react-navigation';
+
+export class Router {
+	private constructor() {
+	}
+
+	public static navigateToHome(dispatch: any): void {
+		const resetAction = NavigationActions.reset({
+			index: 0,
+			actions: [
+				NavigationActions.navigate({ routeName: 'Home' })
+			]
+		})
+		dispatch(resetAction);
+	}
+
+	public static navigateToSingIn(dispatch): void {
+		const backAction = NavigationActions.back({
+			routeName: 'SignIn'
+		})
+		dispatch(backAction);
+	}
+
+	public static navigateToSignUp(navigate: any): void {
+		navigate('SignUp', { name: 'SignUp' });
+	}
+};
 
 const SignedIn = TabNavigator({
 	Home: {

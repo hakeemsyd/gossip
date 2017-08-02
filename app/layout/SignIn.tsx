@@ -1,8 +1,10 @@
+'use strict';
 import React from 'react';
 import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { SignInStore } from '../stores/SignInStore';
 import { observer } from 'mobx-react';
+import { Router } from '../router';
 
 interface Props {
 	navigation?: any; // Question mark indicates prop is optional
@@ -50,7 +52,7 @@ export class SignIn extends React.Component<Props, State> {
 						textStyle={{ color: '#bcbec1' }}
 						title='Create a new Account?'
 						disabled={this.store.isBusy}
-						onPress={() => navigate('SignUp', { name: 'SignUp' })}
+						onPress={() => Router.navigateToSignUp(navigate)}
 					/>
 				</Card>
 			</View>
