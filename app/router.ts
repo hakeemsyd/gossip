@@ -56,12 +56,13 @@ export class Router {
 		}
 	});
 
-	public static navigateToHome(dispatch: any): void {
+	public static navigateToHome(dispatch: any, token: string): void {
 		const resetAction = NavigationActions.reset({
 			index: 0,
 			actions: [
 				NavigationActions.navigate({ routeName: 'Home' })
-			]
+			],
+			params: { token: token }
 		})
 		dispatch(resetAction);
 	}

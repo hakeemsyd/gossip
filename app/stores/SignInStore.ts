@@ -1,7 +1,10 @@
 'use strict';
 import { observable } from 'mobx';
 import { firebaseApp } from '../index';
+import * as firebase from 'firebase';
 import { Router } from '../router';
+import { Constants } from '../utils/constants';
+import Storage from 'react-native-key-value-store';
 
 export class SignInStore {
     @observable
@@ -27,11 +30,15 @@ export class SignInStore {
         this.isBusy = true;
         //do login here
         firebaseApp.auth().signInWithEmailAndPassword(this.username, this.password)
-            .then((a: any) => {
-                console.log(a);
+            .then((user: firebase.User) => {
+                console.log('User email %s', user.email);
                 this.isBusy = false;
-                Router.navigateToHome(dispatch);
 
+                user.getToken(false).then((token: string) => {
+                    console.log('User token: %s', token);
+                    Storage.set(Constants.KEY_TOKEN, token);
+                    Router.navigateToHome(dispatch, token);
+                });
             }).catch((e: Error) => {
                 console.log(e);
                 this.isBusy = false;

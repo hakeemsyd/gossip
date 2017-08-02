@@ -5,6 +5,8 @@ import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { SignUpStore } from '../stores/SignUpStore';
 import { observer } from 'mobx-react';
 import { Router } from '../router';
+import { Constants } from '../utils/constants';
+import Storage from 'react-native-key-value-store';
 
 interface Props {
 	navigation: any;
@@ -23,6 +25,14 @@ export class SignUp extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.store = new SignUpStore();
+	}
+
+	componentDidMount() {
+		Storage.get(Constants.KEY_TOKEN, '').then((token: string) => {
+			if (token !== '') {
+				Router.navigateToHome(this.props.navigation.dispatch, token);
+			}
+		});
 	}
 
 	render() {
