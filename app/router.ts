@@ -14,6 +14,48 @@ export class Router {
 	private constructor() {
 	}
 
+	static SignedIn = TabNavigator({
+		Home: {
+			screen: Home,
+			navigationOptions: {
+				tabBarLabel: 'Home'/*,
+			tabBarIcon: ({ tintColor }) => (
+				<FontAwesome name='home' size={30} color={tintColor} />
+			)*/
+			}
+		},
+		Profile: {
+			screen: Profile,
+			navigationOptions: {
+				tabBarLabel: 'Profile'/*,
+			tabBarIcon: ({ tintColor }) => (
+				<FontAwesome name='user' size={30} color={tintColor} />
+			)*/
+			}
+		}
+	});
+
+	static SignedOut = StackNavigator({
+		SignIn: {
+			screen: SignIn,
+			navigationOptions: {
+				title: 'Sign In'
+			}
+		},
+		SignUp: {
+			screen: SignUp,
+			navigationOptions: {
+				title: 'Sign Up'
+			}
+		},
+		Home: {
+			screen: Router.SignedIn,
+			navigationOptions: {
+				title: 'Home'
+			}
+		}
+	});
+
 	public static navigateToHome(dispatch: any): void {
 		const resetAction = NavigationActions.reset({
 			index: 0,
@@ -35,45 +77,3 @@ export class Router {
 		navigate('SignUp', { name: 'SignUp' });
 	}
 };
-
-const SignedIn = TabNavigator({
-	Home: {
-		screen: Home,
-		navigationOptions: {
-			tabBarLabel: 'Home'/*,
-			tabBarIcon: ({ tintColor }) => (
-				<FontAwesome name='home' size={30} color={tintColor} />
-			)*/
-		}
-	},
-	Profile: {
-		screen: Profile,
-		navigationOptions: {
-			tabBarLabel: 'Profile'/*,
-			tabBarIcon: ({ tintColor }) => (
-				<FontAwesome name='user' size={30} color={tintColor} />
-			)*/
-		}
-	}
-});
-
-export const SignedOut = StackNavigator({
-	SignIn: {
-		screen: SignIn,
-		navigationOptions: {
-			title: 'Sign In'
-		}
-	},
-	SignUp: {
-		screen: SignUp,
-		navigationOptions: {
-			title: 'Sign Up'
-		}
-	},
-	Home: {
-		screen: SignedIn,
-		navigationOptions: {
-			title: 'Home'
-		}
-	}
-});

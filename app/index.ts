@@ -1,4 +1,4 @@
-import { SignedOut } from './router';
+import { Router } from './router';
 import { AppRegistry } from 'react-native';
 import * as firebase from 'firebase';
 
@@ -11,4 +11,4 @@ const config = {
 	messagingSenderId: "298354551253"
 };
 export const firebaseApp = firebase.initializeApp(config);
-AppRegistry.registerComponent('gossip', () => SignedOut);
+AppRegistry.registerComponent('gossip', () => Router.SignedOut);
