@@ -9,22 +9,7 @@ import { SignIn } from './layout/SignIn';
 import { Home } from './layout/Home';
 import { Profile } from './layout/Profile';
 
-export const SignedOut = StackNavigator({
-	SignUp: {
-		screen: SignUp,
-		navigationOptions: {
-			title: 'Sign Up'
-		}
-	},
-	SignIn: {
-		screen: SignIn,
-		navigationOptions: {
-			title: 'Sign In'
-		}
-	}
-});
-
-export const SignedIn = TabNavigator({
+const SignedIn = TabNavigator({
 	Home: {
 		screen: Home,
 		navigationOptions: {
@@ -41,6 +26,27 @@ export const SignedIn = TabNavigator({
 			tabBarIcon: ({ tintColor }) => (
 				<FontAwesome name='user' size={30} color={tintColor} />
 			)*/
+		}
+	}
+});
+
+export const SignedOut = StackNavigator({
+	SignIn: {
+		screen: SignIn,
+		navigationOptions: {
+			title: 'Sign In'
+		}
+	},
+	SignUp: {
+		screen: SignUp,
+		navigationOptions: {
+			title: 'Sign Up'
+		}
+	},
+	Home: {
+		screen: SignedIn,
+		navigationOptions: {
+			title: 'Home'
 		}
 	}
 });

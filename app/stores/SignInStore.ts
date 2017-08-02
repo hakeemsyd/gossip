@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { firebaseApp } from '../index';
-
+import { NavigationActions } from 'react-navigation'
 
 export class SignInStore {
     @observable
@@ -18,7 +18,7 @@ export class SignInStore {
         this.password = password;
     }
 
-    login() {
+    login(dispatch) {
         if (this.isBusy) {
             return;
         }
@@ -29,6 +29,14 @@ export class SignInStore {
             .then((a: any) => {
                 console.log(a);
                 this.isBusy = false;
+
+                const resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({ routeName: 'Home' })
+                    ]
+                })
+                dispatch(resetAction);
             }).catch((e: Error) => {
                 console.log(e);
                 this.isBusy = false;

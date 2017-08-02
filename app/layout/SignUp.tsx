@@ -55,7 +55,7 @@ export class SignUp extends React.Component<Props, State> {
 						buttonStyle={{ marginTop: 20 }}
 						backgroundColor='transparent'
 						textStyle={{ color: '#bcbec1' }}
-						title='Sign In'
+						title='Already have an account?'
 						disabled={this.store.isBusy}
 						onPress={() => navigate('SignIn', { name: 'SignIn' })}
 					/>

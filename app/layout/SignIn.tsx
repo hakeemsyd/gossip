@@ -23,6 +23,7 @@ export class SignIn extends React.Component<Props, State> {
 	}
 
 	render() {
+		const { navigate } = this.props.navigation;
 		return (
 			<View style={{ paddingVertical: 20 }}>
 				<Card title='SIGN IN'>
@@ -41,7 +42,15 @@ export class SignIn extends React.Component<Props, State> {
 						backgroundColor='#03A9F4'
 						title='SIGN IN'
 						disabled={this.store.isBusy}
-						onPress={() => this.store.login()}
+						onPress={() => this.store.login(this.props.navigation.dispatch)}
+					/>
+					<Button
+						buttonStyle={{ marginTop: 20 }}
+						backgroundColor='transparent'
+						textStyle={{ color: '#bcbec1' }}
+						title='Create a new Account?'
+						disabled={this.store.isBusy}
+						onPress={() => navigate('SignUp', { name: 'SignUp' })}
 					/>
 				</Card>
 			</View>
