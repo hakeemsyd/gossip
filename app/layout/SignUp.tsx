@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Card, Button, FormLabel, FormInput } from 'react-native-elements';
 import { SignUpStore } from '../stores/SignUpStore';
 import { observer } from 'mobx-react';
+import { NavigationActions } from 'react-navigation'
 
 interface Props {
 	navigation: any;
@@ -23,8 +24,14 @@ export class SignUp extends React.Component<Props, State> {
 		this.store = new SignUpStore();
 	}
 
+	goBackToSignIn(dispatch) {
+		const backAction = NavigationActions.back({
+			routeName: 'SignIn'
+		})
+		dispatch(backAction);
+	}
+
 	render() {
-		const { navigate } = this.props.navigation;
 		return (
 			<View style={{ paddingVertical: 20 }}>
 				<Card>
@@ -57,7 +64,7 @@ export class SignUp extends React.Component<Props, State> {
 						textStyle={{ color: '#bcbec1' }}
 						title='Already have an account?'
 						disabled={this.store.isBusy}
-						onPress={() => navigate('SignIn', { name: 'SignIn' })}
+						onPress={() => this.goBackToSignIn(this.props.navigation.dispatch)}
 					/>
 				</Card>
 			</View>
