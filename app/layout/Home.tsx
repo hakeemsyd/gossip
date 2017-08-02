@@ -1,6 +1,9 @@
+'use strict'
 import React, { Component } from 'react'
 import { ScrollView, Text, Linking, View } from 'react-native'
 import { Card, Button } from 'react-native-elements'
+import { UserStore } from '../stores/UserStore';
+import { observer } from 'mobx-react';
 
 const images = [
     {
@@ -28,8 +31,25 @@ const images = [
         url: 'https://unsplash.com/photos/89PFnHKg8HE'
     }
 ]
+interface Props {
+    navigation?: any; // Question mark indicates prop is optional
+}
 
-export class Home extends Component {
+interface State {
+}
+@observer
+export class Home extends Component<Props, State> {
+    private store: UserStore;
+
+    constructor(props) {
+        super(props);
+        this.store = new UserStore();
+    }
+
+    static navigationOptions = {
+        title: 'Welcome'
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>

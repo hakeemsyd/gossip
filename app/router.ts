@@ -48,21 +48,21 @@ export class Router {
 				title: 'Sign Up'
 			}
 		},
-		Home: {
-			screen: Router.SignedIn,
-			navigationOptions: {
-				title: 'Home'
-			}
+		UserHome: {
+			screen: Router.SignedIn
 		}
 	});
 
-	public static navigateToHome(dispatch: any, token: string): void {
+	public static navigateToHome(dispatch: any, token: string, email: string): void {
 		const resetAction = NavigationActions.reset({
 			index: 0,
 			actions: [
-				NavigationActions.navigate({ routeName: 'Home' })
+				NavigationActions.navigate({ routeName: 'UserHome' })
 			],
-			params: { token: token }
+			params: {
+				token: token,
+				email: email
+			}
 		})
 		dispatch(resetAction);
 	}

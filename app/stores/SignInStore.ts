@@ -37,7 +37,7 @@ export class SignInStore {
                 user.getToken(false).then((token: string) => {
                     console.log('User token: %s', token);
                     Storage.set(Constants.KEY_TOKEN, token);
-                    Router.navigateToHome(dispatch, token);
+                    Router.navigateToHome(dispatch, token, user.email);
                 });
             }).catch((e: Error) => {
                 console.log(e);
