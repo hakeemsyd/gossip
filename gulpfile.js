@@ -10,14 +10,14 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-gulp.task('compile', function () {
+gulp.task('build', ['assets'], function () {
     var tsResult = tsProject.src().pipe(tsProject());
     return tsResult.js.pipe(gulp.dest('bin'));
 });
 
-gulp.task('assets', function () {
+gulp.task('assets', ['clean'], function () {
     gulp.src("./app/images/**.*")
-        .pipe(gulp.dest('bin/app/images'));
+        .pipe(gulp.dest('bin/app/images/'));
 });
 
 gulp.task('watch', ['build'], function () {
@@ -25,5 +25,4 @@ gulp.task('watch', ['build'], function () {
     gulp.watch('./**/*.tsx', ['compile']);
 });
 
-gulp.task('build', ['clean', 'compile', 'assets'])
 gulp.task('default', ['build']);
